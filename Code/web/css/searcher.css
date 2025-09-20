@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1{
+    text-align: center;
+    color: #4285f4;
+    font-size: 50px;
+}
+
+.search-container {
+    text-align: center;
+    margin: 50px 0;
+}
+
+#search-input {
+    width: 60%;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 24px;
+    outline: none;
+}
+
+#search-button {
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#results-container {
+    margin-top: 30px;
+}
+
+.result-item {
+    margin-bottom: 30px;
+}
+
+.result-title {
+    font-size: 18px;
+    color: #1a0dab;
+    text-decoration: none;
+}
+
+.result-link {
+    color: #006621;
+    font-size: 14px;
+    margin: 5px 0;
+    display: block;
+}
+
+.result-snippet {
+    color: #545454;
+    line-height: 1.5;
+}
+
+.advanced-panel {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+
+.query-types {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.query-type-group {
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+
+.history-sidebar {
+    position: fixed;
+    right: 20px;
+    top: 100px;
+    width: 250px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 15px;
+}
+
+.recommendation-sidebar {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 250px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.snapshot-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    max-width: 80%;
+    max-height: 80vh;
+    overflow: auto;
+}
+
+.toggle-button {
+    background: none;
+    border: 1px solid #ddd;
+    padding: 6px 12px;
+    margin: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.active-toggle {
+    background: #4285f4;
+    color: white;
+}

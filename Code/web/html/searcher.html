@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索引擎</title>
+    <link rel="stylesheet" href="../css/searcher.css">
+    <script src="../js/searcher.js" defer></script>
+</head>
+<body>
+    <h1>搜索引擎</h1>
+   <!-- 搜索栏 -->
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="请输入搜索关键词...">
+        <button id="search-button">搜索</button>
+        <button id="toggle-advanced" class="toggle-button">高级搜索▼</button>
+    </div>
+
+    <!-- 高级搜索面板 -->
+    <div class="advanced-panel" id="advanced-panel" style="display:none;">
+        <div class="query-types">
+            <!-- 站内查询 -->
+            <div class="query-type-group">
+                <h4>短语查询</h4>
+                <button class="toggle-button" data-term="data-term">短语查询</button>
+            </div>
+
+            <!-- 文档类型 -->
+            <div class="query-type-group">
+                <h4>文档类型</h4>
+                <select id="file-type">
+                    <option value="">所有类型</option>
+                    <option value="pdf">PDF</option>
+                    <option value="doc">Word</option>
+                    <option value="xls">Excel</option>
+                </select>
+            </div>
+
+            <!-- 通配查询 -->
+            <div class="query-type-group">
+                <h4>通配符查询</h4>
+                <div>
+                    <button class="toggle-button" data-wildcard="prefix1">前缀*</button>
+                    <button class="toggle-button" data-wildcard="suffix1">*后缀</button>
+                    <button class="toggle-button" data-wildcard="prefix2">前缀?</button>
+                    <button class="toggle-button" data-wildcard="suffix2">?后缀</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 个性化设置 -->
+        <div class="personalization">
+            <h4>个性化设置</h4>
+            <label>每页结果数：
+                <select id="page-size">
+                    <option>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                </select>
+            </label>
+            <label>排序方式：
+                <select id="sort-by">
+                    <option value="relevance">相关度</option>
+                    <option value="date">最新</option>
+                </select>
+            </label>
+        </div>
+    </div>
+
+    <!-- 查询历史侧边栏 -->
+    <div class="history-sidebar">
+        <h4>搜索历史</h4>
+        <ul id="search-history"></ul>
+    </div>
+    
+    <!-- 相关推荐侧边栏 -->
+    <div class="recommendation-sidebar">
+        <h4>相关推荐</h4>
+        <ul id="recommendations"></ul>
+    </div>
+    
+    <!-- 网页快照弹窗 -->
+    <div class="snapshot-popup" id="snapshot-popup">
+        <button onclick="document.getElementById('snapshot-popup').style.display='none'">
+            关闭
+        </button>
+        <div id="snapshot-content"></div>
+    </div>
+
+    <!-- 结果容器 -->
+    <div id="results-container"></div>
+</body>
+</html>
