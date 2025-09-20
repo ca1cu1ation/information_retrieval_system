@@ -1,0 +1,24 @@
+# Web Framework
+Flask==2.3.3
+Flask-CORS==4.0.0
+
+# Database
+mysql-connector-python==8.1.0
+elasticsearch==8.8.2
+
+# Web Scraping & HTML Processing
+requests==2.31.0
+beautifulsoup4==4.12.2
+selenium==4.15.0
+
+# Document Processing
+PyMuPDF==1.23.5
+python-docx==0.8.11
+pandas==2.0.3
+openpyxl==3.1.2
+
+# Text Processing
+jieba==0.42.1
+
+# Standard Library (included in Python, no need to install)
+# os, time, threading, datetime, logging, json, random, re, functools, webbrowser, urllib

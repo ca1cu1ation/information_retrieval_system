@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: ir_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: Qwe248931
+      MYSQL_DATABASE: web_search
+      MYSQL_USER: ir_user
+      MYSQL_PASSWORD: ir_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database_schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    networks:
+      - ir_network
+
+  # Elasticsearch
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.8.2
+    container_name: ir_elasticsearch
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - ir_network
+
+  # Kibana (Optional - for Elasticsearch management)
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.8.2
+    container_name: ir_kibana
+    restart: unless-stopped
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - ir_network
+
+  # Flask Application
+  app:
+    build: .
+    container_name: ir_app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - MYSQL_HOST=mysql
+      - ELASTICSEARCH_HOST=elasticsearch
+      - FLASK_ENV=production
+    depends_on:
+      - mysql
+      - elasticsearch
+    volumes:
+      - ./documents:/app/documents
+      - ./snapshots:/app/snapshots
+      - ./logs:/app/logs
+    networks:
+      - ir_network
+
+  # Nginx (Optional - for serving static files and reverse proxy)
+  nginx:
+    image: nginx:alpine
+    container_name: ir_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./Code/web:/usr/share/nginx/html:ro
+    depends_on:
+      - app
+    networks:
+      - ir_network
+
+volumes:
+  mysql_data:
+  elasticsearch_data:
+
+networks:
+  ir_network:
+    driver: bridge
